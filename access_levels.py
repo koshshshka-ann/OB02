@@ -7,3 +7,37 @@
 # 2. Класс Admin: Этот класс должен наследоваться от класса User. Добавь дополнительный атрибут уровня доступа, специфичный для администраторов ('admin'). Класс должен также содержать методы add_user и remove_user, которые позволяют добавлять и удалять пользователей из списка (представь, что это просто список экземпляров User).
 
 # 3. Инкапсуляция данных: Убедись, что атрибуты классов защищены от прямого доступа и модификации снаружи. Предоставь доступ к необходимым атрибутам через методы (например, get и set методы).
+
+class User:
+    def __init__(self, _user_id, _name):
+        self._user_id = _user_id
+        self._name = _name
+        self._access = 'user'
+
+class Admin(User):
+    def __init__(self, _user_id, _name):
+        super().__init__(_user_id, _name)
+        self._access = 'admin'
+        self._user_list = []
+
+    def _add_user(self, _user_id, _name):
+        _added_user = User(_user_id, _name)
+        self._user_list.append(_added_user)
+        print(f"Пользователь '{_added_user._name}' добавлен в список сотрудников!")
+
+    def _remove_user(self, _user_id, _name):
+        _deleted_user = User(_user_id, _name)
+        self._user_list.remove(_deleted_user)
+        print(f"Пользователь '{_deleted_user._name}' удален из списка сотрудников!")
+
+    def _info(self):
+        for user in self._user_list:
+            print(f"""\nСотрудник {user._user_id}:
+Имя: {user._name}
+Доступ: {user._access}""")
+
+admin = Admin("a-01", "Иван Иванов")
+
+admin._add_user("u-01", "Николай Петров")
+admin._add_user("u-02", "Екатерина Максимова")
+admin._info()
