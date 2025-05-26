@@ -48,6 +48,8 @@ class Admin(User):
 Имя: {user.get_name()}
 Доступ: {user.get_access()}""")
 
+#=== Проверка работы программы ===
+
 users = []
 
 user1 = User("u-01", "Николай Петров")
